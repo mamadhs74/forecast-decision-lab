@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+data/raw/
+artifacts/
+results/
+lightning_logs/
+checkpoints/
+.DS_Store

@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "forecast-decision-lab"
+version = "0.1.0"
+description = "Probabilistic demand forecasting, causal pricing and inventory decisions on data with known ground truth"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy",
+    "pandas",
+    "scipy",
+    "statsmodels",
+    "lightgbm",
+    "statsforecast",
+    "mlforecast",
+    "pyyaml",
+    "typer",
+    "fastapi",
+    "uvicorn",
+    "pandera",
+]
+
+[project.optional-dependencies]
+neural = ["neuralforecast"]
+foundation = ["chronos-forecasting"]
+dev = ["pytest", "httpx", "ruff"]
+
+[project.scripts]
+fdl = "fdl.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+ignore = ["E501"]  # line length of code is handled by `ruff format`; prose in docstrings may run long
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+filterwarnings = ["ignore::DeprecationWarning", "ignore::FutureWarning", "ignore::UserWarning"]
+markers = ["slow: trains neural models"]
